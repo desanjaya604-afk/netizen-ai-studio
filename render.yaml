@@ -1,0 +1,20 @@
+# Deploy via Render -> New -> Blueprint (opsional)
+# Jika menggunakan New -> Web Service, ikuti pengaturan di README_DEPLOY_RENDER.md
+services:
+  - type: web
+    name: netizen-ai-studio
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: APP_ACCESS_TOKEN
+        sync: false
